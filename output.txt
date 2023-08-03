@@ -1,0 +1,49 @@
+AAA
+2
+
+---------------------
+UNORDERED MAP
+---------------------
+FOUND 1
+
+---------------------
+AUTO
+---------------------
+Iterating across map of 2 elements...
+two 2
+one 1
+First element = 2
+
+---------------------
+CONSTRUCTOR/DESTRUCTOR/COPY CONSTRUCTOR
+---------------------
+CONSTRUCTOR 5
+COPY CONSTRUCTOR 5
+printvalue_copy 5
+DESTRUCTOR 5
+printvalue_ref 5
+CONSTRUCTOR 55
+DERIVED CLASS: 55
+DERIVED CLASS: pizza
+DERIVED DESTRUCTOR 0
+DESTRUCTOR 4203232
+DERIVED DESTRUCTOR 55
+DESTRUCTOR 55
+DESTRUCTOR 5
+
+---------------------
+SMART POINTER
+---------------------
+CONSTRUCTOR 6
+CONSTRUCTOR 7
+printvalue_smart 6
+printvalue_unique 7
+DESTRUCTOR 7
+This pointer has been deleted!
+
+---------------------
+TEMPLATE
+---------------------
+int Number = 7
+double Number = 7.7
+DESTRUCTOR 6

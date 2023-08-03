@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -16,6 +16,7 @@ class constructordestructor
 {
     public:
         int value;
+        constructordestructor(){}
         constructordestructor(int inint){
             value = inint;
             std::cout << "CONSTRUCTOR " << inint << "\n";
@@ -31,6 +32,30 @@ class constructordestructor
         }
 
 };
+
+class derived : public constructordestructor
+{
+    public:
+        int derived_class_value;
+        // specify the "int" base class constructor here
+        // if no default base class constructor is defined, you must specify it after ":"
+        // or else you will get compiler error: "No Matching Function Call to Base class"
+        derived(int inint) : constructordestructor(inint) {
+            derived_class_value = inint;
+            std::cout << "DERIVED CLASS: " << inint << "\n";
+        }
+        // this derived constructor causes the base constructor to print weird values 
+        // because you never define the base class "value"
+        derived(std::string instring) {
+            derived_class_value = 0;
+            std::cout << "DERIVED CLASS: " << instring << "\n";
+        }
+        
+        ~derived(){
+            std::cout << "DERIVED DESTRUCTOR " << derived_class_value << "\n";
+        }
+};
+
 
 void section_break(const std::string instring)
 {
@@ -55,6 +80,44 @@ void printvalue_unique(const std::unique_ptr<constructordestructor> inObject)
 {
     std::cout << "printvalue_unique " << inObject->value << "\n";
 }
+
+void constructordestructorstuff()
+{
+    constructordestructor a_thing(5);
+    printvalue_copy(a_thing);
+    printvalue_ref(&a_thing);
+    derived another_thing(55);
+    derived pizza_thing("pizza");
+}
+
+
+// Class template
+template <class T>
+class Number {
+   private:
+    // Variable of type T
+    T num;
+
+   public:
+    Number(T n) : num(n) {}   // constructor
+
+    T getNum() {
+        return num;
+    }
+};
+
+void template_thing() {
+
+    // create object with int type
+    Number<int> numberInt(7);
+
+    // create object with double type
+    Number<double> numberDouble(7.7);
+
+    std::cout << "int Number = " << numberInt.getNum() << std::endl;
+    std::cout << "double Number = " << numberDouble.getNum() << std::endl;
+}
+
 
 
 int main(){
@@ -94,10 +157,8 @@ int main(){
     //-----------------------------------------------------
     // Constructor/destructor/copy constructor
 
-    section_break("CONSTRUCTOR/DESTRUCTOR");
-    constructordestructor a_thing(5);
-    printvalue_copy(a_thing);
-    printvalue_ref(&a_thing);
+    section_break("CONSTRUCTOR/DESTRUCTOR/COPY CONSTRUCTOR");
+    constructordestructorstuff();
 
     section_break("SMART POINTER");
 
@@ -112,7 +173,14 @@ int main(){
         std::cout << punique->value << "\n";
     else
         std::cout << "This pointer has been deleted!\n";    
-
+        
+    section_break("TEMPLATE");
+    template_thing();
     
     return 0;
 }
+
+
+
+
+
