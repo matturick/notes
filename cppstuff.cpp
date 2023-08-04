@@ -90,7 +90,7 @@ void constructordestructorstuff()
     derived pizza_thing("pizza");
 }
 
-
+//-----------------------
 // Class template
 template <class T>
 class Number {
@@ -105,6 +105,38 @@ class Number {
         return num;
     }
 };
+//-----------------------
+template <typename thing>
+class crime {
+   private:
+    thing private_thing;
+
+   public:
+    crime(thing in_thing) {
+        private_thing = in_thing;
+    }   
+
+    void doCrime() {
+        private_thing.manifesto();
+    }
+};
+
+class arson{
+  public:
+    arson(){}
+    void manifesto(){
+        std::cout << "ARSON\n";
+    }
+};
+
+class jaywalking{
+  public:
+    jaywalking(){}
+    void manifesto(){
+        std::cout << "JAYWALKING\n";
+    }
+};
+//-----------------------
 
 void template_thing() {
 
@@ -116,6 +148,14 @@ void template_thing() {
 
     std::cout << "int Number = " << numberInt.getNum() << std::endl;
     std::cout << "double Number = " << numberDouble.getNum() << std::endl;
+    
+    // you can call any member function as long as it has the same name 
+    arson a;
+    jaywalking j;
+    crime<arson> b(a);
+    crime<jaywalking> c(j);
+    b.doCrime();
+    c.doCrime();
 }
 
 
@@ -163,7 +203,6 @@ int main(){
     section_break("SMART POINTER");
 
     std::shared_ptr<constructordestructor> pshared = std::make_shared<constructordestructor>(6);
-    //std::shared_ptr<constructordestructor> pshared = std::make_shared<constructordestructor>(a_thing);
     std::unique_ptr<constructordestructor> punique = std::make_unique<constructordestructor>(7);
     printvalue_smart(pshared);
     printvalue_unique(std::move(punique)); // this is how you need to pass a reference to unique_ptr...by moving it
@@ -177,8 +216,10 @@ int main(){
     section_break("TEMPLATE");
     template_thing();
     
+
     return 0;
 }
+
 
 
 

@@ -46,4 +46,6 @@ TEMPLATE
 ---------------------
 int Number = 7
 double Number = 7.7
+ARSON
+JAYWALKING
 DESTRUCTOR 6
